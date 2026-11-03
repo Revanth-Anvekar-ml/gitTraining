@@ -186,6 +186,17 @@ and it is not your local `main` branch. Prepared branches include:
 | `workshop/conflict-left` | First side of a same-line theme conflict |
 | `workshop/conflict-right` | Competing theme change for the conflict lab |
 
+Prepared commit map:
+
+| Ref | Commit message |
+| --- | --- |
+| `main` | `chore: add Git refresher course and lab baseline`; `docs: add deployment checklist` |
+| `workshop/feature-profile` | `feat: add profile view` |
+| `workshop/feature-report` | `feat: add daily report` |
+| `workshop/rebase-demo` | `docs: add rebase exercise note` |
+| `workshop/conflict-left` | `feat: prefer dark theme` |
+| `workshop/conflict-right` | `feat: add blue theme` |
+
 Fetch updated remote refs and check out a remote branch for inspection:
 
 ```sh
@@ -346,6 +357,7 @@ git --git-dir=../gitTraining-demo-remote.git symbolic-ref HEAD refs/heads/main
 git remote add classroom ../gitTraining-demo-remote.git
 git push -u classroom main
 git push classroom --all
+git clone ../gitTraining-demo-remote.git ../gitTraining-second-clone
 git remote -v
 ```
 
@@ -358,6 +370,14 @@ git switch -c intern/remote-practice
 git add <path>
 git commit -m "docs: practice publishing a branch"
 git push -u classroom intern/remote-practice
+```
+
+The second clone does not know about the new branch until it fetches:
+
+```sh
+git -C ../gitTraining-second-clone fetch origin
+git -C ../gitTraining-second-clone branch --all --verbose
+git -C ../gitTraining-second-clone switch --track origin/intern/remote-practice
 ```
 
 `git push -u` sets the upstream so later `git push` and `git pull` know which
